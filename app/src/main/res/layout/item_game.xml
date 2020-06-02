@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="game"
+            type="apps.trichain.gtalauncher.model.Game" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/item_bg">
+
+        <ImageView
+            android:id="@+id/imgOnlineOffline"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_margin="12dp"
+            android:src="@{game.serverOnline?@drawable/ic_online:@drawable/ic_offline}"
+            app:layout_constraintBottom_toBottomOf="@id/tvGameName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvGameName" />
+
+        <TextView
+            android:id="@+id/tvGameName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="@{game.title}"
+            android:textColor="@color/colorWhite"
+            android:textSize="22sp"
+            app:layout_constraintEnd_toStartOf="@id/imgLaunchGame"
+            app:layout_constraintStart_toEndOf="@id/imgOnlineOffline"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@{@string/ping_address(game.pingAddress)}"
+            android:textColor="@color/colorGreyLight"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@id/imgLaunchGame"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imgLaunchGame"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_margin="12dp"
+            android:src="@drawable/ic_play"
+            android:tint="@color/colorWhite"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/btnPlayGame"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_margin="12dp"
+            android:src="@drawable/ic_play"
+            android:tint="@color/colorWhite"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvNumPlayers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_person"
+            android:drawablePadding="16dp"
+            android:fontFamily="@font/poppins_regular"
+            android:padding="12dp"
+            android:text="@{@string/num_players(game.numPlayers)}"
+            android:textColor="@color/colorGreyLight"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imgOnlineOffline" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/gradient_new_bg"
+            android:drawableStart="@drawable/ic_check"
+            android:drawablePadding="4dp"
+            android:fontFamily="@font/poppins_bold"
+            android:paddingStart="4dp"
+            android:paddingEnd="8dp"
+            android:text="NEW"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp"
+            android:visibility="@{game.new?View.VISIBLE:View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnPlayGame"
+            app:layout_constraintTop_toBottomOf="@id/imgOnlineOffline" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "541418028187",
+    "firebase_url": "https://gta-launcher.firebaseio.com",
+    "project_id": "gta-launcher",
+    "storage_bucket": "gta-launcher.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:541418028187:android:2397fb330d1c35fe6a9a3e",
+        "android_client_info": {
+          "package_name": "apps.trichain.gtalauncher"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "541418028187-r7ns59cibbetcelrii8du2dcr5itf19f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "apps.trichain.gtalauncher",
+            "certificate_hash": "51d46a9bad68e792909203dc0358b32877b6d284"
+          }
+        },
+        {
+          "client_id": "541418028187-2tb8b6j9lfj0mukmbards62h8d57ctq6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJEc7oYBYwatjvsRB4IFdLU0K_mw0XeI8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "541418028187-2tb8b6j9lfj0mukmbards62h8d57ctq6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragment.PlayFragment">
+
+        <ProgressBar
+            android:id="@+id/pbGamesLoading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateDrawable="@drawable/custom_progress_bar"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/playToolBar"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:background="@color/transparent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_play_icon"
+                android:drawablePadding="16dp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="bottom"
+                android:text="Play"
+                android:textColor="@color/colorWhite"
+                android:textSize="24sp"
+                tools:drawableTint="@color/colorBlack"
+                tools:textColor="@color/colorBlack" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewGames"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/playToolBar"
+            tools:itemCount="5"
+            tools:listitem="@layout/item_game" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

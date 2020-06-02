@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">GTA Launcher</string>
+    <string name="app_name">Brasil Play Shox</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="one">Tab One</string>
+    <string name="two">Tab Two</string>
+    <string name="title_home">Home</string>
+    <string name="title_play">Play</string>
+    <string name="title_settings">Settings</string>
+    <string name="title_activity_settings_fragment">SettingsFragment</string>
+
+    <string name="ping_address">Ping %1$d</string>
+    <string name="num_players">%1$d / 1000</string>
+
 </resources>

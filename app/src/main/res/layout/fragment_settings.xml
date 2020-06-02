@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.SettingsFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/settingsToolBar"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@color/transparent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_settings_two"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Settings"
+            android:drawablePadding="16dp"
+            android:textColor="@color/colorWhite"
+            android:textSize="24sp"
+            tools:drawableTint="@color/colorBlack"
+            tools:textColor="@color/colorBlack" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/transparent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/settingsToolBar"
+        app:tabIndicatorColor="@color/colorWhite"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="@color/colorWhite"
+        app:tabTextColor="@color/colorGreyLight" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabs" />
+</androidx.constraintlayout.widget.ConstraintLayout>
