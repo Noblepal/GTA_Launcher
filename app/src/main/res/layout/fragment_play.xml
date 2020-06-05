@@ -10,6 +10,17 @@
         android:layout_height="match_parent"
         tools:context=".fragment.PlayFragment">
 
+        <TextView
+            android:id="@+id/tvNoData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No data available"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ProgressBar
             android:id="@+id/pbGamesLoading"
             android:layout_width="wrap_content"
@@ -34,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_play_icon"
                 android:drawablePadding="16dp"
-                android:fontFamily="@font/poppins_bold"
+                android:fontFamily="@font/game_sans"
                 android:gravity="bottom"
                 android:text="Play"
                 android:textColor="@color/colorWhite"

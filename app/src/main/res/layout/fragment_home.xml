@@ -1,62 +1,209 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragment.HomeFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/homeToolBar"
+    <data />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:background="@color/transparent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        tools:background="@drawable/gradient_bg"
+        tools:context=".fragment.HomeFragment">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/homeToolBar"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:background="@color/transparent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_home_two"
+                android:drawablePadding="16dp"
+                android:fontFamily="@font/game_sans"
+                android:text="Home"
+                android:textColor="@color/colorWhite"
+                android:textSize="24sp"
+                tools:drawableTint="@color/colorBlack"
+                tools:textColor="@color/colorBlack" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <!--App installed view-->
+        <LinearLayout
+            android:id="@+id/llLaunchGameParent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_home_two"
-            android:drawablePadding="16dp"
-            android:fontFamily="@font/poppins_bold"
-            android:text="Home"
-            android:textColor="@color/colorWhite"
-            android:textSize="24sp"
-            tools:drawableTint="@color/colorBlack"
-            tools:textColor="@color/colorBlack" />
+            android:layout_margin="24dp"
+            android:orientation="vertical"
+            android:visibility="visible"
+            app:layout_constraintTop_toBottomOf="@id/homeToolBar">
 
-    </androidx.appcompat.widget.Toolbar>
+            <LinearLayout
+                android:id="@+id/llLaunchGame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                android:background="@drawable/gradient_card_bg"
+                android:clickable="true"
+                android:orientation="vertical"
+                android:padding="16dp"
+                app:layout_constraintTop_toBottomOf="@id/homeToolBar">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="24dp"
-        android:background="@drawable/gradient_card_bg"
-        android:orientation="vertical"
-        android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/homeToolBar">
+                <TextView
+                    android:id="@+id/tvLaunchGame"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="16dp"
+                    android:fontFamily="@font/game_sans"
+                    android:text="Launch GTA SA"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="24sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_date"
-            android:drawablePadding="16dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="02, May 2020"
-            android:textColor="@color/colorWhite"
-            android:textSize="24sp" />
+                <TextView
+                    android:id="@+id/tvMDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:drawableStart="@drawable/ic_date"
+                    android:drawablePadding="8dp"
+                    android:fontFamily="@font/game_sans"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="14sp"
+                    tools:text="02, May 2020" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvUpdateData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_margin="16dp"
+                android:background="@drawable/gradient_new_bg"
+                android:fontFamily="@font/game_sans"
+                android:padding="8dp"
+                android:text="Update Data"
+                android:textColor="@color/colorWhite"
+                android:textSize="21sp" />
+
+        </LinearLayout>
+
+        <!--Downloading view-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clDownloading"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/homeToolBar">
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawablePadding="16dp"
-            android:fontFamily="@font/poppins_bold"
-            android:text="This is come description. Version 4.1"
-            android:textColor="@color/colorWhite"
-            android:textSize="24sp" />
+            <ImageView
+                android:id="@+id/imgAppLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:src="@drawable/logo"
+                android:tint="@color/colorWhite"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                app:layout_constraintBottom_toTopOf="@id/tvInformation"
+                app:layout_constraintTop_toBottomOf="@id/imgAppLogo">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/game_sans"
+                    android:text="GTA SA"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="24sp"
+                    tools:textColor="@color/colorBlack" />
+
+                <ProgressBar
+                    android:id="@+id/pbDownloading"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    android:max="100"
+                    android:progress="0" />
+
+                <TextView
+                    android:id="@+id/tvDownloadProgress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/game_sans"
+                    android:gravity="center"
+                    android:text="@string/downloading"
+                    android:textColor="@color/colorGreyLight" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/tvInformation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/game_sans"
+                android:padding="16dp"
+                android:text="@string/lorem"
+                android:textColor="@color/colorWhite"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--App not installed view-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clAppNotInstalled"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/homeToolBar">
+
+            <TextView
+                android:id="@+id/tvAppNotInstalled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/game_sans"
+                android:gravity="center"
+                android:text="@string/gta_not_installed"
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnDownloadGTA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="36dp"
+                android:background="@drawable/gradient_card_bg"
+                android:fontFamily="@font/game_sans"
+                android:text="@string/download_gta"
+                android:textColor="@color/colorWhite"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/tvAppNotInstalled" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

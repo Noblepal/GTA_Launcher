@@ -24,6 +24,7 @@ import apps.trichain.gtalauncher.GameListAdapter;
 import apps.trichain.gtalauncher.R;
 import apps.trichain.gtalauncher.databinding.FragmentPlayBinding;
 import apps.trichain.gtalauncher.model.Game;
+import apps.trichain.gtalauncher.util.util;
 
 public class PlayFragment extends Fragment {
 
@@ -58,6 +59,7 @@ public class PlayFragment extends Fragment {
     }
 
     private void downloadGames() {
+        util.hideView(b.tvNoData);
         b.pbGamesLoading.setVisibility(View.VISIBLE);
         gamesListener = dbReference.child("games").addValueEventListener(new ValueEventListener() {
             @Override
@@ -66,8 +68,13 @@ public class PlayFragment extends Fragment {
                 for (DataSnapshot gameSnapShot : dataSnapshot.getChildren()) {
                     gamesList.add(gameSnapShot.getValue(Game.class));
                 }
-                gamesAdapter.notifyDataSetChanged();
+
                 b.pbGamesLoading.setVisibility(View.GONE);
+                if (gamesList != null && gamesList.size() > 0) {
+                    gamesAdapter.notifyDataSetChanged();
+                } else {
+                    util.showView(b.tvNoData);
+                }
             }
 
             @Override

@@ -10,5 +10,12 @@
 
     <string name="ping_address">Ping %1$d</string>
     <string name="num_players">%1$d / 1000</string>
+    <string name="lorem">Lorem ipsum is just dummy text. Lorem ipsum is just dummy text. Lorem ipsum is just dummy text. Lorem ipsum is just dummy text. Lorem ipsum is just dummy text.</string>
+    <string name="downloading">Downloading %1$s, %2$s (build %3$.2f) … %4$d%%</string>
+
+    <string name="gta_data">https://download850.mediafire.com/50m1b1jizhyg/n7qndn6mjn83wmc/Data+Brasil+Play+Shox+1.0.11.zip</string>
+    <string name="gta_obb">https://dl4.apksum.com/download/com.rockstargames.gtasa-1.08-obb?dv=0ac4e64e76b55d55b7443f5d3e6b1450&amp;st=1591337350</string>
+    <string name="gta_not_installed">GTA SA is NOT installed on your device \n Click the download button below to download</string>
+    <string name="download_gta">Download GTA SA (v%1$s)</string>
 
 </resources>

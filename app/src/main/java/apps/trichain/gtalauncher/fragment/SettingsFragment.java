@@ -27,13 +27,13 @@ public class SettingsFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_settings, container, false);
 
-        loadFragments();
+        //loadFragments();
 
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getActivity(), settingsSubFragmentsList, getChildFragmentManager());
+        /*SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getActivity(), settingsSubFragmentsList, getChildFragmentManager());
         ViewPager viewPager = root.findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = root.findViewById(R.id.tabs);
-        tabs.setupWithViewPager(viewPager);
+        tabs.setupWithViewPager(viewPager);*/
 
         return root;
     }

@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2196F3</color>
+    <color name="colorPrimary">#7e13b0</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#3F51B5</color>
     <color name="colorWhite">#FFFFFF</color>
 
-    <color name="transparent">#00000000</color>
     <color name="colorBlack">#000000</color>
-    <color name="colorAlmostBlack">#DF000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="blackTranslucent">#B9000000</color>
+    <color name="colorAlmostBlack">#EE000000</color>
     <color name="colorGreyLight">#A5A5A5</color>
     <color name="colorBlue">#2C4EDE</color>
     <color name="colorPurple">#CE6EF0</color>
-    <color name="translucentBlack">#80000000</color>
+    <color name="cardItemBG">#AD000000</color>
 </resources>
