@@ -8,7 +8,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:background="@drawable/gradient_bg"
         tools:context=".fragment.HomeFragment">
 
         <androidx.appcompat.widget.Toolbar
@@ -24,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_home_two"
                 android:drawablePadding="16dp"
-                android:fontFamily="@font/game_sans"
+                android:fontFamily="@font/poppins_regular"
                 android:text="Home"
                 android:textColor="@color/colorWhite"
                 android:textSize="24sp"
@@ -59,7 +58,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawablePadding="16dp"
-                    android:fontFamily="@font/game_sans"
+                    android:fontFamily="@font/poppins_regular"
                     android:text="Launch GTA SA"
                     android:textColor="@color/colorWhite"
                     android:textSize="24sp" />
@@ -71,25 +70,12 @@
                     android:layout_marginTop="12dp"
                     android:drawableStart="@drawable/ic_date"
                     android:drawablePadding="8dp"
-                    android:fontFamily="@font/game_sans"
+                    android:fontFamily="@font/poppins_regular"
                     android:textColor="@color/colorWhite"
                     android:textSize="14sp"
                     tools:text="02, May 2020" />
 
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/tvUpdateData"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_margin="16dp"
-                android:background="@drawable/gradient_new_bg"
-                android:fontFamily="@font/game_sans"
-                android:padding="8dp"
-                android:text="Update Data"
-                android:textColor="@color/colorWhite"
-                android:textSize="21sp" />
 
         </LinearLayout>
 
@@ -127,7 +113,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:fontFamily="@font/game_sans"
+                    android:fontFamily="@font/poppins_regular"
                     android:text="GTA SA"
                     android:textColor="@color/colorWhite"
                     android:textSize="24sp"
@@ -139,14 +125,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:indeterminate="true"
+                    android:indeterminateDrawable="@drawable/progress_horizontal"
                     android:max="100"
-                    android:progress="0" />
+                    android:progress="0"
+                    android:progressDrawable="@drawable/progress_horizontal" />
 
                 <TextView
                     android:id="@+id/tvDownloadProgress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/game_sans"
+                    android:fontFamily="@font/poppins_regular"
                     android:gravity="center"
                     android:text="@string/downloading"
                     android:textColor="@color/colorGreyLight" />
@@ -158,7 +146,7 @@
                 android:id="@+id/tvInformation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/game_sans"
+                android:fontFamily="@font/poppins_regular"
                 android:padding="16dp"
                 android:text="@string/lorem"
                 android:textColor="@color/colorWhite"
@@ -182,7 +170,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:fontFamily="@font/game_sans"
+                android:fontFamily="@font/poppins_regular"
                 android:gravity="center"
                 android:text="@string/gta_not_installed"
                 android:textColor="@color/colorWhite"
@@ -197,13 +185,29 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="36dp"
                 android:background="@drawable/gradient_card_bg"
-                android:fontFamily="@font/game_sans"
+                android:fontFamily="@font/poppins_regular"
                 android:text="@string/download_gta"
                 android:textColor="@color/colorWhite"
                 android:textSize="18sp"
                 app:layout_constraintTop_toBottomOf="@id/tvAppNotInstalled" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tvUpdateData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_margin="16dp"
+            android:fontFamily="@font/poppins_regular"
+            android:background="@drawable/update_availavble_bg"
+            android:padding="8dp"
+            android:text="Update Available! Download Now"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

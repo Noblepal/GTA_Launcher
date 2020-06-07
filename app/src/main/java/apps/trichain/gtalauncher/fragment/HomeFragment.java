@@ -204,9 +204,9 @@ public class HomeFragment extends Fragment {
         b.pbDownloading.setIndeterminate(true);
         String downloadedFileName = "";
         if (isDataFile) {
-            serverFilePath = links.getDataURL();
+            //serverFilePath = links.getDataURL();
             Log.e(TAG, "downloadFile: Data URL: " + serverFilePath);
-            //serverFilePath = "https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-zip-file.zip";
+            serverFilePath = "https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-zip-file.zip";
             downloadedFileName = DATA_FILE;
         } else {//Download OBB File
             downloadedFileName = OBB_FILE;
