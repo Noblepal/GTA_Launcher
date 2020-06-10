@@ -95,7 +95,7 @@
                     android:background="@drawable/update_availavble_bg"
                     android:fontFamily="@font/poppins_regular"
                     android:padding="8dp"
-                    android:text="Update Available! Download Now"
+                    android:text="@string/update_available"
                     android:textColor="@color/colorWhite"
                     android:textSize="16sp" />
 
@@ -104,7 +104,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="12dp"
-                    android:text="Skip"
+                    android:text="@string/skip"
                     android:textColor="@color/colorWhite"
                     android:textSize="18sp" />
 
@@ -127,7 +127,7 @@
                     android:background="@drawable/update_availavble_bg"
                     android:fontFamily="@font/poppins_regular"
                     android:padding="8dp"
-                    android:text="All data is up to date"
+                    android:text="@string/data_is_upto_date"
                     android:textColor="@color/colorWhite"
                     android:textSize="16sp" />
 
@@ -136,7 +136,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="12dp"
-                    android:text="Proceed"
+                    android:text="@string/proceed"
                     android:textColor="@color/colorWhite"
                     android:textSize="18sp" />
 
