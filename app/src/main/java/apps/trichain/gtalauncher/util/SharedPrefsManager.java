@@ -20,6 +20,14 @@ public class SharedPrefsManager {
         return instance;
     }
 
+    public void setIsFirstTimeLaunch(boolean isFirstTimeLaunch) {
+        sharedPreferences.edit().putBoolean("is_first_time_launch", isFirstTimeLaunch).apply();
+    }
+
+    public boolean checkIsFirstTimeLaunch() {
+        return sharedPreferences.getBoolean("is_first_time_launch", true);
+    }
+
     public void updateLinks(Links links) {
         sharedPreferences.edit().putString("links", links.serialize()).apply();
     }
@@ -44,7 +52,7 @@ public class SharedPrefsManager {
         return sharedPreferences.getBoolean("is_obb_file_downloaded", false);
     }
 
-    public void setHasDonwloadedAllFiles(boolean b) {
+    public void setHasDownloadedAllFiles(boolean b) {
         sharedPreferences.edit().putBoolean("has_downloaded_files", b).apply();
     }
 

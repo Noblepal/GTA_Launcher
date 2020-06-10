@@ -7,6 +7,7 @@ public class Links {
     private String dataURL;
     private String obbURL;
     private String realOBBURL;
+    private int updateVersion;
 
     public Links() {
     }
@@ -41,6 +42,14 @@ public class Links {
 
     public void setObbURL(String obbURL) {
         this.obbURL = obbURL;
+    }
+
+    public int getUpdateVersion() {
+        return updateVersion;
+    }
+
+    public void setUpdateVersion(int updateVersion) {
+        this.updateVersion = updateVersion;
     }
 
     public String serialize() {

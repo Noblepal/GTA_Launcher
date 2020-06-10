@@ -13,12 +13,16 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import apps.trichain.gtalauncher.R;
+import apps.trichain.gtalauncher.util.SharedPrefsManager;
 import apps.trichain.gtalauncher.util.util;
 import apps.trichain.gtalauncher.viewModel.GameViewModel;
+
+import static apps.trichain.gtalauncher.util.util.GTA_SA_PACKAGE_NAME;
 
 public class MainActivity extends AppCompatActivity {
 
     private GameViewModel viewModel;
+    private SharedPrefsManager sharedPrefsManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,14 +30,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         setUpNavigation();
-
-        ViewModelProvider.AndroidViewModelFactory factory = new ViewModelProvider.AndroidViewModelFactory(getApplication());
-        viewModel = new ViewModelProvider(this, factory).get(GameViewModel.class);
-
-        PackageManager manager = getPackageManager();
-
-        viewModel.setIsPackageInstalled(util.isPackageInstalled("com.rockstargames.gtasa", manager));
-
 
     }
 

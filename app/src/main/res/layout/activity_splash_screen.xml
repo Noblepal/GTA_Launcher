@@ -18,7 +18,6 @@
 
         <!--Downloading view-->
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clDownloading"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -38,6 +37,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
+                android:id="@+id/llDownloading"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -49,11 +49,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:fontFamily="@font/poppins_regular"
+                    android:fontFamily="@font/poppins_bold"
                     android:text="GTA SA"
                     android:textColor="@color/colorWhite"
-                    android:textSize="24sp"
-                    tools:textColor="@color/colorBlack" />
+                    android:textSize="24sp" />
 
                 <ProgressBar
                     android:id="@+id/pbDownloading"
@@ -75,7 +74,38 @@
                     android:fontFamily="@font/poppins_regular"
                     android:gravity="center"
                     android:text="@string/downloading"
-                    android:textColor="@color/colorGreyLight" />
+                    android:textColor="@color/colorWhite" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llUpdateData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@id/tvInformation">
+
+                <TextView
+                    android:id="@+id/tvUpdateData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/update_availavble_bg"
+                    android:fontFamily="@font/poppins_regular"
+                    android:padding="8dp"
+                    android:text="Update Available! Download Now"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvSkip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:text="Skip"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
@@ -85,12 +115,54 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
-                android:padding="16dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:paddingBottom="24dp"
                 android:text="@string/lorem"
                 android:textColor="@color/colorWhite"
                 app:layout_constraintBottom_toBottomOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--App not installed view-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clAppNotInstalled"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tvAppNotInstalled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center"
+                android:text="@string/gta_not_installed"
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnDownloadGTA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="36dp"
+                android:background="@drawable/gradient_card_bg"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/download_gta"
+                android:textColor="@color/colorWhite"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/tvAppNotInstalled" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

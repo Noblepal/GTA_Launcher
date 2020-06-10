@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/fb_photo" />
+        android:src="@drawable/main_background" />
 
     <View
         android:layout_width="match_parent"
@@ -25,8 +25,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
+        app:elevation="0dp"
         android:layout_marginEnd="0dp"
-        android:background="@color/colorBlack"
+        android:background="@color/transparent"
         app:itemIconTint="@drawable/selector_bottom_nav"
         app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"

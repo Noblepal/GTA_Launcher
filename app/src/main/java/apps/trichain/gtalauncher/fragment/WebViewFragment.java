@@ -72,13 +72,6 @@ public class WebViewFragment extends DialogFragment {
             Snackbar s = Snackbar.make(b.webview, "Click on the Download button to start download", BaseTransientBottomBar.LENGTH_INDEFINITE);
             s.show();
 
-            WebChromeClient webChromeClient = new WebChromeClient() {
-                @Override
-                public void onReceivedTitle(WebView view, String title) {
-                    getDialog().getWindow().setTitle(title); //Set Activity tile to page title.
-                }
-            };
-
             WebViewClient webViewClient = new WebViewClient() {
                 @Override
                 public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
@@ -103,7 +96,6 @@ public class WebViewFragment extends DialogFragment {
                 }
             };
             b.webview.setWebViewClient(webViewClient);
-            b.webview.setWebChromeClient(webChromeClient);
             b.webview.loadUrl(links.getObbURL());
             //b.webview.loadUrl("https://www.google.com");
 

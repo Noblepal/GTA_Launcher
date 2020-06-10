@@ -10,6 +10,16 @@ import java.io.File;
 import java.util.Locale;
 
 public class util {
+
+    public static final String GTA_SA_PACKAGE_NAME = "com.rockstargames.gtasa";
+    public static final String DATA_FILE = "GTA_DATA_ZIP.zip";
+    public static final String OBB_FILE = "GTA_DATA_ZIP.zip";
+    public static final String DATA_FILE_PATH = "/" + DATA_FILE;
+    public static final String OBB_FILE_PATH = "/" + OBB_FILE;
+    public static final String ANDROID_DATA_DIR = "/Android/data/";
+    public static final String ANDROID_OBB_DIR = "/Android/obb/";
+    public static final String BRASIL_PLAY_SHOX_DIR = "/Brasil Play Shox";
+
     public static boolean isPackageInstalled(String packageName, PackageManager packageManager) {
         try {
             packageManager.getPackageInfo(packageName, 0);
@@ -19,33 +29,39 @@ public class util {
         }
     }
 
-    public static void hideView(View v) {
+    public static void hideView(View v, boolean withAnimation) {
         if (v.getVisibility() == View.VISIBLE) {
-            v.animate()
-                    .alpha(0f)
-                    .setDuration(350)
-                    .setListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            v.setVisibility(View.GONE);
-                        }
-                    });
+            if (withAnimation)
+                v.animate()
+                        .alpha(0f)
+                        .setDuration(350)
+                        .setListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                v.setVisibility(View.GONE);
+                            }
+                        });
+            else v.setVisibility(View.GONE);
         }
     }
 
-    public static void showView(View v) {
+    public static void showView(View v, boolean withAnimation) {
         if (v.getVisibility() == View.GONE || v.getVisibility() == View.INVISIBLE) {
-            v.setAlpha(0f);
-            v.setVisibility(View.VISIBLE);
-            v.animate()
-                    .alpha(1f)
-                    .setDuration(350)
-                    .setListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            v.setVisibility(View.VISIBLE);
-                        }
-                    });
+            if (withAnimation) {
+                v.setAlpha(0f);
+                v.setVisibility(View.VISIBLE);
+                v.animate()
+                        .alpha(1f)
+                        .setDuration(350)
+                        .setListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                v.setVisibility(View.VISIBLE);
+                            }
+                        });
+            } else {
+                v.setVisibility(View.VISIBLE);
+            }
         }
     }
 
