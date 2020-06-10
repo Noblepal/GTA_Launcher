@@ -14,6 +14,7 @@ public class util {
     public static final String GTA_SA_PACKAGE_NAME = "com.rockstargames.gtasa";
     public static final String DATA_FILE = "GTA_DATA_ZIP.zip";
     public static final String OBB_FILE = "GTA_DATA_ZIP.zip";
+    public static final String APK_FILE = "GTA_APK.apk";
     public static final String DATA_FILE_PATH = "/" + DATA_FILE;
     public static final String OBB_FILE_PATH = "/" + OBB_FILE;
     public static final String ANDROID_DATA_DIR = "/Android/data/";

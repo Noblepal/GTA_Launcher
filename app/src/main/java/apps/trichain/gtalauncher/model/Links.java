@@ -1,5 +1,7 @@
 package apps.trichain.gtalauncher.model;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.Gson;
 
 public class Links {
@@ -58,5 +60,11 @@ public class Links {
 
     public static Links create(String mLinks) {
         return new Gson().fromJson(mLinks, Links.class);
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return this.serialize();
     }
 }

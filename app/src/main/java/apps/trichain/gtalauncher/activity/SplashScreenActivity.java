@@ -47,6 +47,7 @@ import apps.trichain.gtalauncher.viewModel.GameViewModel;
 
 import static apps.trichain.gtalauncher.util.util.ANDROID_DATA_DIR;
 import static apps.trichain.gtalauncher.util.util.ANDROID_OBB_DIR;
+import static apps.trichain.gtalauncher.util.util.APK_FILE;
 import static apps.trichain.gtalauncher.util.util.BRASIL_PLAY_SHOX_DIR;
 import static apps.trichain.gtalauncher.util.util.DATA_FILE;
 import static apps.trichain.gtalauncher.util.util.DATA_FILE_PATH;
@@ -58,10 +59,13 @@ import static apps.trichain.gtalauncher.util.util.humanify;
 public class SplashScreenActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE = 325;
+    private static final int VIEW_DEFAULT = 0;
     private static final int VIEW_DOWNLOAD = 1;
-    private static final int VIEW_APP_NOT_INSTALLED = 2;
-    private static final int VIEW_UPDATE = 3;
-    private static final int VIEW_DEFAULT = 4;
+    private static final int VIEW_UPDATE = 2;
+    private static final int VIEW_APP_NOT_INSTALLED = 3;
+    private static final String FILE_DATA = "file_data";
+    private static final String FILE_OBB = "file_obb";
+    private static final String FILE_APK = "file_apk";
 
     private GameViewModel viewModel;
     private NetworkController networkController;
@@ -92,6 +96,7 @@ public class SplashScreenActivity extends AppCompatActivity {
             downloadLinks();
         } else {
             links = Links.create(sharedPrefsManager.getLinks());
+            Log.e(TAG, "onCreate: Not first time launch. Links: " + links);
             checkForUpdates();
         }
 
@@ -103,16 +108,6 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         //Check if com.rockstargames.gtasa is installed on device
         viewModel.setIsPackageInstalled(util.isPackageInstalled(GTA_SA_PACKAGE_NAME, manager));
-
-        /*If package is installed
-         * check for updates*/
-        if (!util.isPackageInstalled(GTA_SA_PACKAGE_NAME, manager)) {//App not installed
-            b.btnDownloadGTA.setText(getResources().getString(R.string.download_gta, String.valueOf(links.getAppVersion())));
-            b.btnDownloadGTA.setOnClickListener(v -> {
-                toggleViews(VIEW_DOWNLOAD);
-                downloadFile(true);
-            });
-        }
 
         /*Check write external storage permissions*/
         if (checkPermissions()) {
@@ -127,6 +122,11 @@ public class SplashScreenActivity extends AppCompatActivity {
                 toggleViews(VIEW_DEFAULT);
             } else {
                 toggleViews(VIEW_APP_NOT_INSTALLED);
+                b.btnDownloadGTA.setText(getResources().getString(R.string.download_gta, "_Latest" /*String.valueOf(links.getAppVersion())*/));
+                b.btnDownloadGTA.setOnClickListener(v -> {
+                    toggleViews(VIEW_DOWNLOAD);
+                    downloadFile(FILE_APK);
+                });
             }
         });
 
@@ -184,19 +184,19 @@ public class SplashScreenActivity extends AppCompatActivity {
             case VIEW_APP_NOT_INSTALLED:
                 util.hideView(b.llUpdateData, true);
                 util.showView(b.clAppNotInstalled, true);
-                util.hideView(b.llDownloading, true);
+                util.hideView(b.llDownloading, false);
                 util.hideView(b.llDefault, true);
                 break;
             case VIEW_UPDATE:
                 util.showView(b.llUpdateData, true);
                 util.hideView(b.clAppNotInstalled, true);
-                util.hideView(b.llDownloading, true);
+                util.hideView(b.llDownloading, false);
                 util.hideView(b.llDefault, true);
                 break;
             default://TODO
                 util.hideView(b.llUpdateData, true);
                 util.hideView(b.clAppNotInstalled, true);
-                util.hideView(b.llDownloading, true);
+                util.hideView(b.llDownloading, false);
                 util.showView(b.llDefault, true);
                 b.tvProceed.setOnClickListener(v -> {
                     startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
@@ -214,11 +214,6 @@ public class SplashScreenActivity extends AppCompatActivity {
                 assert mLinks != null;
                 sharedPrefsManager.updateLinks(mLinks);
 
-                try {
-                    dbReference.removeEventListener(urlEventListener);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
             }
 
             @Override
@@ -226,6 +221,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                 Log.e(TAG, "onCancelled: " + databaseError.getMessage());
             }
         });
+        sharedPrefsManager.setIsFirstTimeLaunch(false);
     }
 
     private void checkForUpdates() {
@@ -233,28 +229,19 @@ public class SplashScreenActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 mLinks = dataSnapshot.getValue(Links.class);
-
-                if (links == null) {
-                    Toast.makeText(SplashScreenActivity.this, "First time launch", Toast.LENGTH_SHORT).show();
-                }
-
                 assert mLinks != null;
                 if (mLinks.getUpdateVersion() > links.getUpdateVersion()) {
                     //Toast.makeText(SplashScreenActivity.this, "Update available", Toast.LENGTH_SHORT).show();
                     util.showView(b.tvUpdateData, true);
                     b.tvUpdateData.setOnClickListener(v -> {
                         toggleViews(VIEW_UPDATE);
-                        downloadFile(true);
+                        downloadFile(FILE_DATA);
                     });
 
                     b.tvSkip.setOnClickListener(c -> {
                         startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
                     });
-                } else {
-                    startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
-                    finish();
                 }
-                sharedPrefsManager.setIsFirstTimeLaunch(false);
             }
 
             @Override
@@ -269,23 +256,27 @@ public class SplashScreenActivity extends AppCompatActivity {
         viewModel.getDownloadURL().observe(this, obbDownloadURL -> {
             //serverFilePath = links.getObbURL();
             serverFilePath = obbDownloadURL;
-            if (!hasDownloadedData)
-                downloadFile(false);
-            hasDownloadedOBB = true;
+            if (!hasDownloadedData) {
+                downloadFile(FILE_OBB);
+                hasDownloadedOBB = true;
+            }
         });
     }
 
-    private void downloadFile(boolean isDataFile) {
+    private void downloadFile(String fileToDownload) {
         b.tvDownloadProgress.setText("Preparing...");
         b.pbDownloading.setIndeterminate(true);
         String downloadedFileName = "";
-        if (isDataFile) {
+        if (fileToDownload.equals(FILE_DATA)) {
             serverFilePath = links.getDataURL();
             Log.e(TAG, "downloadFile: Data URL: " + serverFilePath);
             //serverFilePath = "https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-zip-file.zip";
             downloadedFileName = DATA_FILE;
-        } else {//Download OBB File
+        } else if (fileToDownload.equals(FILE_OBB)) {//Download OBB File
             downloadedFileName = OBB_FILE;
+        } else {
+            serverFilePath = "https://dl.apkhere.com/down.do/com.rockstargames.gtasa_1.08_paid?code=00c5cd28118695180c15ea360b16621e";
+            downloadedFileName = APK_FILE;
         }
 
         String downloadPath = util.getDownloadedPath().getPath();
@@ -308,7 +299,10 @@ public class SplashScreenActivity extends AppCompatActivity {
 
             @Override
             public void onDownloadCompleted() {
-                unpackZip(isDataFile);
+                if (fileToDownload.equals(FILE_DATA))
+                    unpackZip(true);
+                else if (fileToDownload.equals(FILE_OBB)) unpackZip(false);
+                else openAppInstaller();
             }
 
             @Override
@@ -321,15 +315,33 @@ public class SplashScreenActivity extends AppCompatActivity {
             @Override
             public void onDownloadProgress(int lengthOfFile, int progress) {
                 b.pbDownloading.setProgress(progress);
-                b.tvDownloadProgress.setText(isDataFile ?
-                        getResources().getString(R.string.downloading, "GTA GTA Data File", humanify(lengthOfFile), links.getAppVersion(), progress)
-                        : getResources().getString(R.string.downloading, "GTA Additional OBB Files", humanify(lengthOfFile), links.getAppVersion(), progress));
+                if (fileToDownload.equals(FILE_DATA)) {
+                    b.tvDownloadProgress.setText(getResources().getString(R.string.downloading, "GTA Data File", humanify(lengthOfFile), links.getAppVersion(), progress));
+                } else if (fileToDownload.equals(FILE_OBB)) {
+                    b.tvDownloadProgress.setText(getResources().getString(R.string.downloading, "GTA Additional OBB Files", humanify(lengthOfFile), links.getAppVersion(), progress));
+                } else {
+                    b.tvDownloadProgress.setText(getResources().getString(R.string.downloading, "GTA APK File", humanify(lengthOfFile), links.getAppVersion(), progress));
+                }
             }
-
         };
 
         FileDownloadService.FileDownloader downloader = FileDownloadService.FileDownloader.getInstance(downloadRequest, listener);
         downloader.download(this);
+    }
+
+    private void openAppInstaller() {
+        /*File file = new File(BRASIL_PLAY_SHOX_DIR, APK_FILE);
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(FileProvider.getUriForFile(this,
+                getApplicationContext().getPackageName() + ".provider", file),
+                "application/vnd.android.package-archive");
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        startActivity(intent);*/
+        /*Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(Uri.fromFile(new File(BRASIL_PLAY_SHOX_DIR, APK_FILE)),"application/vnd.android.package-archive");
+        startActivity(intent);*/
+        Toast.makeText(this, "Open file manager and navigate to Brasil Play Shox folder to install the APK",
+                Toast.LENGTH_LONG).show();
     }
 
     private void downloadOBBFile() {
