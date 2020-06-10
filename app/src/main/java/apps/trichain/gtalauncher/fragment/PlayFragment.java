@@ -59,7 +59,7 @@ public class PlayFragment extends Fragment {
     }
 
     private void downloadGames() {
-        util.hideView(b.tvNoData);
+        util.hideView(b.tvNoData, true);
         b.pbGamesLoading.setVisibility(View.VISIBLE);
         gamesListener = dbReference.child("games").addValueEventListener(new ValueEventListener() {
             @Override
@@ -73,7 +73,7 @@ public class PlayFragment extends Fragment {
                 if (gamesList != null && gamesList.size() > 0) {
                     gamesAdapter.notifyDataSetChanged();
                 } else {
-                    util.showView(b.tvNoData);
+                    util.showView(b.tvNoData, true);
                 }
             }
 

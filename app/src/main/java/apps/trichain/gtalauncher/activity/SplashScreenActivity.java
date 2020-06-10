@@ -178,22 +178,29 @@ public class SplashScreenActivity extends AppCompatActivity {
             case VIEW_DOWNLOAD:
                 util.hideView(b.llUpdateData, true);
                 util.hideView(b.clAppNotInstalled, true);
+                util.hideView(b.llDefault, true);
                 util.showView(b.llDownloading, true);
                 break;
             case VIEW_APP_NOT_INSTALLED:
                 util.hideView(b.llUpdateData, true);
                 util.showView(b.clAppNotInstalled, true);
                 util.hideView(b.llDownloading, true);
+                util.hideView(b.llDefault, true);
                 break;
             case VIEW_UPDATE:
                 util.showView(b.llUpdateData, true);
                 util.hideView(b.clAppNotInstalled, true);
                 util.hideView(b.llDownloading, true);
+                util.hideView(b.llDefault, true);
                 break;
             default://TODO
                 util.hideView(b.llUpdateData, true);
                 util.hideView(b.clAppNotInstalled, true);
                 util.hideView(b.llDownloading, true);
+                util.showView(b.llDefault, true);
+                b.tvProceed.setOnClickListener(v -> {
+                    startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
+                });
         }
     }
 

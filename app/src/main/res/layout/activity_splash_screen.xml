@@ -84,6 +84,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
+                android:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@id/tvInformation">
 
                 <TextView
@@ -104,6 +105,38 @@
                     android:layout_height="wrap_content"
                     android:padding="12dp"
                     android:text="Skip"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llDefault"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@id/tvInformation">
+
+                <TextView
+                    android:id="@+id/tvDefault"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/update_availavble_bg"
+                    android:fontFamily="@font/poppins_regular"
+                    android:padding="8dp"
+                    android:text="All data is up to date"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvProceed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:text="Proceed"
                     android:textColor="@color/colorWhite"
                     android:textSize="18sp" />
 

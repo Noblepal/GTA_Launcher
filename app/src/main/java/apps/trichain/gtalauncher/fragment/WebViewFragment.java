@@ -83,7 +83,7 @@ public class WebViewFragment extends DialogFragment {
                 @Override
                 public void onPageFinished(WebView view, String url) {
                     if (url.startsWith("https://dl4.apksum.com")) {
-                        util.hideView(b.pbGamesLoading);
+                        util.hideView(b.pbGamesLoading, true);
                         Log.e(TAG, "onPageFinished: OBB url " + url);
                         viewModel.updateDownloadURL(url);
                         s.dismiss();
