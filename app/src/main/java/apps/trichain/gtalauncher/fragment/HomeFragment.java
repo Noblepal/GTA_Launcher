@@ -42,7 +42,7 @@ public class HomeFragment extends Fragment {
                     startActivity(launchIntent);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(c, "GTA SA not installed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(c, R.string.gta_not_installed_toast, Toast.LENGTH_SHORT).show();
                 }
             });
 

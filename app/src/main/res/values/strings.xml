@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Brasil Play Shox</string>
+    <!--<string name="app_name">Brasil Play Shox</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="one">Tab One</string>
     <string name="two">Tab Two</string>
@@ -17,5 +17,34 @@
     <string name="gta_obb">https://dl4.apksum.com/download/com.rockstargames.gtasa-1.08-obb?dv=0ac4e64e76b55d55b7443f5d3e6b1450&amp;st=1591337350</string>
     <string name="gta_not_installed">GTA SA is NOT installed on your device \n Click the download button below to download</string>
     <string name="download_gta">Download GTA SA (v%1$s)</string>
+    <string name="launch_gta_sa">Launch GTA</string>
+-->
+    <string name="app_name">Brasil Play Shox</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="one">Tab One</string>
+    <string name="two">Tab Two</string>
+    <string name="title_home">Inicio</string>
+    <string name="title_play">Jogar</string>
+    <string name="title_settings">Configurações</string>
+    <string name="title_activity_settings_fragment">SettingsFragment</string>
+
+    <string name="ping_address">Ping %1$d</string>
+    <string name="num_players">%1$d / 1000</string>
+    <string name="lorem">Todos direitos reservados a Brasil Play Shox. \n Criadores: Xandy_Shox e ZeebooL_Shox</string>
+    <string name="downloading">Baixando %1$s, %2$s (build %3$.2f) … %4$d%%</string>
+
+    <string name="gta_data">https://download850.mediafire.com/50m1b1jizhyg/n7qndn6mjn83wmc/Data+Brasil+Play+Shox+1.0.11.zip</string>
+    <string name="gta_obb">https://dl4.apksum.com/download/com.rockstargames.gtasa-1.08-obb?dv=0ac4e64e76b55d55b7443f5d3e6b1450&amp;st=1591337350</string>
+    <string name="gta_not_installed">GTA SA não está instalado no seu dispositivo \n Clique no botão para fazer o download.</string>
+    <string name="download_gta">Download GTA SA (v%1$s)</string>
+    <string name="launch_gta_sa">Iniciar GTA</string>
+    <string name="download_message">Clique no botão Download para iniciar o download</string>
+    <string name="gta_not_installed_toast">GTA SA não instalado</string>
+    <string name="extracting_files">Extraindo arquivos...</string>
+    <string name="download_complete">Download completo</string>
+    <string name="preparing">Preparando...</string>
+    <string name="download_failed">Falha no Download. O link expirou!</string>
+    <string name="navigate_to_directory">Abra o gerenciador de arquivos e navegue até a pasta Brasil Play Shox para instalar o APK</string>
+    <string name="permission_renied">Permissão negada</string>
 
 </resources>

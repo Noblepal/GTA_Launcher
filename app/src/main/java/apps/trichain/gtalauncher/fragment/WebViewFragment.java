@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.CookieManager;
-import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -69,7 +68,7 @@ public class WebViewFragment extends DialogFragment {
         b.webview.getSettings().setJavaScriptEnabled(true);
 
         if (links != null) {
-            Snackbar s = Snackbar.make(b.webview, "Click on the Download button to start download", BaseTransientBottomBar.LENGTH_INDEFINITE);
+            Snackbar s = Snackbar.make(b.webview, R.string.download_message, BaseTransientBottomBar.LENGTH_INDEFINITE);
             s.show();
 
             WebViewClient webViewClient = new WebViewClient() {

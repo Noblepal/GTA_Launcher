@@ -132,7 +132,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         viewModel.getmIsExtraxtingFiles().observe(this, isExtractingFiles -> {
             if (isExtractingFiles) {
-                b.tvDownloadProgress.setText("Extracting files...");
+                b.tvDownloadProgress.setText(R.string.extracting_files);
                 b.pbDownloading.setIndeterminate(true);
             } else {
                 b.pbDownloading.setIndeterminate(false);
@@ -143,7 +143,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                 } else {
                     Log.e(TAG, "doInBackground: Download is complete: file(s)");
                     b.pbDownloading.setProgress(100);
-                    Toast.makeText(this, "Download Complete", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.download_complete, Toast.LENGTH_SHORT).show();
                     sharedPrefsManager.setHasDownloadedAllFiles(true);
                     sharedPrefsManager.saveUpdateDate(Calendar.getInstance().getTime().toString());
                     sharedPrefsManager.updateLinks(mLinks);
@@ -264,7 +264,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
 
     private void downloadFile(String fileToDownload) {
-        b.tvDownloadProgress.setText("Preparing...");
+        b.tvDownloadProgress.setText(R.string.preparing);
         b.pbDownloading.setIndeterminate(true);
         String downloadedFileName = "";
         if (fileToDownload.equals(FILE_DATA)) {
@@ -307,7 +307,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
             @Override
             public void onDownloadFailed() {
-                b.tvDownloadProgress.setText("Download Failed. Link has expired!");
+                b.tvDownloadProgress.setText(R.string.download_failed);
                 b.pbDownloading.setIndeterminate(false);
                 b.pbDownloading.setProgress(0);
             }
@@ -340,7 +340,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         /*Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setDataAndType(Uri.fromFile(new File(BRASIL_PLAY_SHOX_DIR, APK_FILE)),"application/vnd.android.package-archive");
         startActivity(intent);*/
-        Toast.makeText(this, "Open file manager and navigate to Brasil Play Shox folder to install the APK",
+        Toast.makeText(this, R.string.navigate_to_directory,
                 Toast.LENGTH_LONG).show();
     }
 
@@ -456,7 +456,7 @@ public class SplashScreenActivity extends AppCompatActivity {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Log.i(TAG, "onRequestPermissionsResult: Permission granted");
             } else {
-                Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.permission_renied, Toast.LENGTH_SHORT).show();
             }
         }
     }
