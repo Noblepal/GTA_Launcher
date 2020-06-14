@@ -1,9 +1,12 @@
 package apps.trichain.gtalauncher.fragment;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +15,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+
+import com.google.android.material.textfield.TextInputEditText;
 
 import apps.trichain.gtalauncher.R;
 import apps.trichain.gtalauncher.databinding.FragmentHomeBinding;
@@ -51,7 +56,5 @@ public class HomeFragment extends Fragment {
 
         return b.getRoot();
     }
-
-
 }
 

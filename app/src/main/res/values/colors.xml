@@ -8,8 +8,6 @@
 
     <color name="colorBlack">#000000</color>
     <color name="transparent">#00000000</color>
-    <color name="blackTranslucent">#90000000</color>
-    <color name="colorAlmostBlack">#BE000000</color>
     <color name="colorGreyLight">#A5A5A5</color>
     <color name="colorBlue">#64B5F6</color>
     <color name="colorPurple">#CE6EF0</color>

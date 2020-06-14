@@ -52,7 +52,8 @@
                 android:clickable="true"
                 android:orientation="vertical"
                 android:padding="16dp"
-                app:layout_constraintTop_toBottomOf="@id/homeToolBar">
+                app:layout_constraintTop_toBottomOf="@id/homeToolBar"
+                android:focusable="true">
 
                 <TextView
                     android:id="@+id/tvLaunchGame"

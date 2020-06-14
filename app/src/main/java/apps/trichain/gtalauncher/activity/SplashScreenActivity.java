@@ -2,23 +2,36 @@ package apps.trichain.gtalauncher.activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -55,6 +68,7 @@ import static apps.trichain.gtalauncher.util.util.GTA_SA_PACKAGE_NAME;
 import static apps.trichain.gtalauncher.util.util.OBB_FILE;
 import static apps.trichain.gtalauncher.util.util.OBB_FILE_PATH;
 import static apps.trichain.gtalauncher.util.util.humanify;
+import static apps.trichain.gtalauncher.util.util.saveNickName;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -99,6 +113,8 @@ public class SplashScreenActivity extends AppCompatActivity {
             Log.e(TAG, "onCreate: Not first time launch. Links: " + links);
             checkForUpdates();
         }
+
+        verifyNickName();
 
         //Init view model
         ViewModelProvider.AndroidViewModelFactory factory =
@@ -172,6 +188,32 @@ public class SplashScreenActivity extends AppCompatActivity {
         finish();*/
 
     }
+
+    private void verifyNickName() {
+        if (checkHasSavedNickName()) {
+            View mDialogView = LayoutInflater.from(this).inflate(R.layout.dialog_save_nickname, null);
+            TextInputEditText edtNickName = mDialogView.findViewById(R.id.edtDialogNickName);
+            new AlertDialog.Builder(this)
+                    .setTitle("Entre com seu apelido")
+                    .setView(mDialogView)
+                    .setCancelable(false)
+                    .setPositiveButton("Save", (dialog, which) -> {
+                        String mNickName = edtNickName.getText().toString().trim();
+                        if (!TextUtils.isEmpty(mNickName)) {
+                            Log.i(TAG, "onCreateView: Saving nickname: " + mNickName);
+                            saveNickName(this, mNickName);
+                        } else {
+
+                            Toast.makeText(this, "Digite o apelido", Toast.LENGTH_SHORT).show();
+                        }
+                    }).show();
+        }
+    }
+
+    private boolean checkHasSavedNickName() {
+        return TextUtils.isEmpty(sharedPrefsManager.getNickName());
+    }
+
 
     private void toggleViews(int viewID) {
         switch (viewID) {
@@ -459,6 +501,33 @@ public class SplashScreenActivity extends AppCompatActivity {
                 Toast.makeText(this, R.string.permission_renied, Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private void createNotification(String title, String body) {
+        int notificationId = 0;
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+                .setSmallIcon(R.mipmap.ic_launcher_round)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher_round))
+                .setContentTitle(title)
+                .setContentText(body)
+                .setAutoCancel(false)
+                .setDefaults(NotificationCompat.DEFAULT_ALL);
+
+        Uri path = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        builder.setSound(path);
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            String channelId = "DOWNLOAD_NOTIFICATION";
+            NotificationChannel channel = new NotificationChannel(channelId,
+                    "Downloading",
+                    NotificationManager.IMPORTANCE_DEFAULT);
+            notificationManager.createNotificationChannel(channel);
+            builder.setChannelId(channelId);
+        }
+
+        notificationManager.notify(notificationId, builder.build());
     }
 
     @Override

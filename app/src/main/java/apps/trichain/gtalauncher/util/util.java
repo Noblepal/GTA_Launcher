@@ -2,15 +2,22 @@ package apps.trichain.gtalauncher.util;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.os.AsyncTask;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Locale;
 
 public class util {
 
+    private static final String TAG = "util";
     public static final String GTA_SA_PACKAGE_NAME = "com.rockstargames.gtasa";
     public static final String DATA_FILE = "GTA_DATA_ZIP.zip";
     public static final String OBB_FILE = "GTA_DATA_ZIP.zip";
@@ -19,7 +26,9 @@ public class util {
     public static final String OBB_FILE_PATH = "/" + OBB_FILE;
     public static final String ANDROID_DATA_DIR = "/Android/data/";
     public static final String ANDROID_OBB_DIR = "/Android/obb/";
+    public static final String NICK_NAME_FILE_PATH = ANDROID_DATA_DIR + GTA_SA_PACKAGE_NAME + "/files/NickName.ini";
     public static final String BRASIL_PLAY_SHOX_DIR = "/Brasil Play Shox";
+    private static SharedPrefsManager sharedPrefsManager;
 
     public static boolean isPackageInstalled(String packageName, PackageManager packageManager) {
         try {
@@ -109,5 +118,44 @@ public class util {
             s = String.format(Locale.US, "%.2f", tb) + " TB";
         }
         return s;
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    public static void saveNickName(Context context, String nickName) {
+        sharedPrefsManager = SharedPrefsManager.getInstance(context);
+        File absFile = Environment.getExternalStorageDirectory();
+        File fileNickName = new File(absFile, NICK_NAME_FILE_PATH);
+
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+            }
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+                try {
+                    if (!fileNickName.exists()) {
+                        Log.e(TAG, "saveNickName: User has not downloaded files, creating empty directory");
+                        fileNickName.getParentFile().getParentFile().mkdirs();
+                        fileNickName.createNewFile();
+                    }
+                    byte[] bytes = nickName.getBytes();
+                    FileOutputStream oS = new FileOutputStream(fileNickName);
+                    oS.write(bytes);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                sharedPrefsManager.setNickName(nickName);
+                Toast.makeText(context, "Apelido atualizado", Toast.LENGTH_SHORT).show();
+            }
+        }.execute();
     }
 }

@@ -13,6 +13,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:contentDescription="@string/bg"
             android:scaleType="centerCrop"
             android:src="@drawable/bg" />
 
@@ -30,6 +31,7 @@
                 android:id="@+id/imgAppLogo"
                 android:layout_width="wrap_content"
                 android:layout_height="200dp"
+                android:contentDescription="TODO"
                 android:src="@drawable/logo"
                 android:tint="@color/colorWhite"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="GTA SA"
+                    android:text="@string/gta_sa"
                     android:textColor="@color/colorWhite"
                     android:textSize="24sp" />
 

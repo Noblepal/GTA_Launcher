@@ -67,4 +67,12 @@ public class SharedPrefsManager {
     public String getLastUpdatedDate() {
         return sharedPreferences.getString("last_updated", "");
     }
+
+    public void setNickName(String nickName) {
+        sharedPreferences.edit().putString("nick_name", nickName).apply();
+    }
+
+    public String getNickName() {
+        return sharedPreferences.getString("nick_name", null);
+    }
 }
