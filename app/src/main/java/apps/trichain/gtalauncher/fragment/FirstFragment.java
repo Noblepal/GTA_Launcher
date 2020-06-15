@@ -1,6 +1,7 @@
 package apps.trichain.gtalauncher.fragment;
 
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,18 +44,39 @@ public class FirstFragment extends Fragment {
         SharedPrefsManager sharedPrefsManager = SharedPrefsManager.getInstance(getContext());
 
         b.edtNickName.setText(sharedPrefsManager.getNickName());
+        b.edtNickName.setFilters(new InputFilter[]{new InputFilter.LengthFilter(20), filter});
+        b.edtNickName.setOnFocusChangeListener((v, hasFocus) -> {
+            if (b.edtNickName.getText().toString().trim().length() < 3)
+                b.edtNickName.setError("Minimum length is 3");
+            else
+                b.edtNickName.setError(null);
 
+        });
         b.btnSaveNickName.setOnClickListener(v -> {
             nickName = b.edtNickName.getText().toString();
 
             if (TextUtils.isEmpty(nickName)) {
                 Toast.makeText(getContext(), "O apelido é obrigatório", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getContext(), "Salvando apelido", Toast.LENGTH_SHORT).show();
-                saveNickName(getContext(), nickName);
+                if (nickName.length() < 3) {
+                    Toast.makeText(getContext(), "O comprimento mínimo é 3", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "Salvando apelido", Toast.LENGTH_SHORT).show();
+                    saveNickName(getContext(), nickName);
+                }
             }
         });
 
         return b.getRoot();
     }
+
+    private InputFilter filter = (source, start, end, dest, dstart, dend) -> {
+
+        String blockCharacterSet = ".,;@~#^|$%&*!()<>?/:\"'|+=";
+        if (source != null && blockCharacterSet.contains(("" + source))) {
+            return "";
+        }
+        return null;
+    };
+
 }

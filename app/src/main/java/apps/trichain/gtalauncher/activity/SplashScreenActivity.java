@@ -15,6 +15,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -193,15 +194,27 @@ public class SplashScreenActivity extends AppCompatActivity {
         if (checkHasSavedNickName()) {
             View mDialogView = LayoutInflater.from(this).inflate(R.layout.dialog_save_nickname, null);
             TextInputEditText edtNickName = mDialogView.findViewById(R.id.edtDialogNickName);
+            edtNickName.setFilters(new InputFilter[]{new InputFilter.LengthFilter(20), filter});
+            edtNickName.setOnFocusChangeListener((v, hasFocus) -> {
+                if (edtNickName.getText().toString().trim().length() < 3)
+                    edtNickName.setError("Minimum length is 3");
+                else
+                    edtNickName.setError(null);
+
+            });
             new AlertDialog.Builder(this)
                     .setTitle("Entre com seu apelido")
                     .setView(mDialogView)
                     .setCancelable(false)
-                    .setPositiveButton("Save", (dialog, which) -> {
+                    .setPositiveButton("Salvar", (dialog, which) -> {
                         String mNickName = edtNickName.getText().toString().trim();
                         if (!TextUtils.isEmpty(mNickName)) {
-                            Log.i(TAG, "onCreateView: Saving nickname: " + mNickName);
-                            saveNickName(this, mNickName);
+                            if (mNickName.length() < 3) {
+                                Toast.makeText(this, "O comprimento mínimo é 3", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Log.i(TAG, "onCreateView: Saving nickname: " + mNickName);
+                                saveNickName(this, mNickName);
+                            }
                         } else {
 
                             Toast.makeText(this, "Digite o apelido", Toast.LENGTH_SHORT).show();
@@ -209,6 +222,15 @@ public class SplashScreenActivity extends AppCompatActivity {
                     }).show();
         }
     }
+
+    private InputFilter filter = (source, start, end, dest, dstart, dend) -> {
+
+        String blockCharacterSet = ".,;@~#^|$%&*!()<>?/:\"'|+=";
+        if (source != null && blockCharacterSet.contains(("" + source))) {
+            return "";
+        }
+        return null;
+    };
 
     private boolean checkHasSavedNickName() {
         return TextUtils.isEmpty(sharedPrefsManager.getNickName());

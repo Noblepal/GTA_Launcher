@@ -12,7 +12,6 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import apps.trichain.gtalauncher.R;
@@ -39,9 +38,6 @@ public class SettingsFragment extends Fragment {
     }
 
     private void loadFragments() {
-        settingsSubFragmentsList.addAll(Arrays.asList(
-                FirstFragment.newInstance(0),
-                SecondFragment.newInstance(1)
-        ));
+        settingsSubFragmentsList.add(FirstFragment.newInstance(0));
     }
 }

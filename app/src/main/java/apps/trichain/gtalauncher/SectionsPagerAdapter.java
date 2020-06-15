@@ -10,16 +10,12 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import java.util.List;
 
-/**
- * A [FragmentPagerAdapter] that returns a fragment corresponding to
- * one of the sections/tabs/pages.
- */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     private List<Fragment> settingsSubFragmentsList;
 
     @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.one, R.string.two};
+    private static final int[] TAB_TITLES = new int[]{R.string.one};
     private final Context mContext;
 
     public SectionsPagerAdapter(Context context, List<Fragment> settingsSubFragmentsList, FragmentManager fm) {

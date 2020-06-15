@@ -45,12 +45,10 @@
     <string name="skip">Pular</string>
     <string name="update_available">Atualização disponível! Baixe Agora</string>
     <string name="gta_sa">GTA SA</string>
-    <string name="first_child_fragment">First Child Fragment</string>
     <string name="no_data_available">No data available</string>
-    <string name="second_child_fragment">Second Child Fragment</string>
     <string name="mNew">NEW</string>
     <string name="bg">bg</string>
-    <string name="save">Salve</string>
+    <string name="save">Salvar</string>
     <string name="nickname">Nickname</string>
 
 </resources>
