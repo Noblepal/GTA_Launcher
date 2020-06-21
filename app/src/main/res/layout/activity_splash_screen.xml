@@ -80,6 +80,7 @@
 
             </LinearLayout>
 
+            <!--Update available view-->
             <LinearLayout
                 android:id="@+id/llUpdateData"
                 android:layout_width="match_parent"
@@ -112,6 +113,7 @@
 
             </LinearLayout>
 
+            <!--Default View-->
             <LinearLayout
                 android:id="@+id/llDefault"
                 android:layout_width="match_parent"
@@ -126,7 +128,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:background="@drawable/update_availavble_bg"
                     android:fontFamily="@font/poppins_regular"
                     android:padding="8dp"
                     android:text="@string/data_is_upto_date"
@@ -137,6 +138,7 @@
                     android:id="@+id/tvProceed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/update_availavble_bg"
                     android:padding="12dp"
                     android:text="@string/proceed"
                     android:textColor="@color/colorWhite"
@@ -195,6 +197,84 @@
                 android:textColor="@color/colorWhite"
                 android:textSize="18sp"
                 app:layout_constraintTop_toBottomOf="@id/tvAppNotInstalled" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--DATA FILE not found view-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clDataNotFound"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tvDataNotFound"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center"
+                android:text="@string/data_not_found"
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnDownloadData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="36dp"
+                android:background="@drawable/gradient_card_bg"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/download_data_file"
+                android:textColor="@color/colorWhite"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/tvDataNotFound" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--OBB FILE not found view-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clOBBNotFound"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tvOBBNotFound"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center"
+                android:text="@string/obb_not_found"
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnDownloadOBB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="36dp"
+                android:background="@drawable/gradient_card_bg"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/download_obb_file"
+                android:textColor="@color/colorWhite"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/tvOBBNotFound" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

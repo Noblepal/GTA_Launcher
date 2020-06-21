@@ -1,4 +1,4 @@
-package apps.trichain.gtalauncher.fragment;
+package apps.trichain.brasilplayshox.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,8 +14,8 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-import apps.trichain.gtalauncher.R;
-import apps.trichain.gtalauncher.SectionsPagerAdapter;
+import apps.trichain.brasilplayshox.R;
+import apps.trichain.brasilplayshox.SectionsPagerAdapter;
 
 public class SettingsFragment extends Fragment {
 

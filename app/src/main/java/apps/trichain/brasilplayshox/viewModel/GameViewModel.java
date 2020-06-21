@@ -1,4 +1,4 @@
-package apps.trichain.gtalauncher.viewModel;
+package apps.trichain.brasilplayshox.viewModel;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

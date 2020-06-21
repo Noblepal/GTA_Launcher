@@ -1,4 +1,4 @@
-package apps.trichain.gtalauncher.fragment;
+package apps.trichain.brasilplayshox.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -19,12 +19,12 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
-import apps.trichain.gtalauncher.R;
-import apps.trichain.gtalauncher.databinding.WebviewFragmentBinding;
-import apps.trichain.gtalauncher.model.Links;
-import apps.trichain.gtalauncher.util.SharedPrefsManager;
-import apps.trichain.gtalauncher.util.util;
-import apps.trichain.gtalauncher.viewModel.GameViewModel;
+import apps.trichain.brasilplayshox.R;
+import apps.trichain.brasilplayshox.databinding.WebviewFragmentBinding;
+import apps.trichain.brasilplayshox.model.Links;
+import apps.trichain.brasilplayshox.util.SharedPrefsManager;
+import apps.trichain.brasilplayshox.util.util;
+import apps.trichain.brasilplayshox.viewModel.GameViewModel;
 
 public class WebViewFragment extends DialogFragment {
 
@@ -81,7 +81,7 @@ public class WebViewFragment extends DialogFragment {
 
                 @Override
                 public void onPageFinished(WebView view, String url) {
-                    if (url.startsWith("https://dl4.apksum.com")) {
+                    if (url.endsWith(".zip")) {
                         util.hideView(b.pbGamesLoading, true);
                         Log.e(TAG, "onPageFinished: OBB url " + url);
                         viewModel.updateDownloadURL(url);

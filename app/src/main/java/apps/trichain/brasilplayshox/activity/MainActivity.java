@@ -1,10 +1,8 @@
-package apps.trichain.gtalauncher.activity;
+package apps.trichain.brasilplayshox.activity;
 
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -12,12 +10,9 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import apps.trichain.gtalauncher.R;
-import apps.trichain.gtalauncher.util.SharedPrefsManager;
-import apps.trichain.gtalauncher.util.util;
-import apps.trichain.gtalauncher.viewModel.GameViewModel;
-
-import static apps.trichain.gtalauncher.util.util.GTA_SA_PACKAGE_NAME;
+import apps.trichain.brasilplayshox.R;
+import apps.trichain.brasilplayshox.util.SharedPrefsManager;
+import apps.trichain.brasilplayshox.viewModel.GameViewModel;
 
 public class MainActivity extends AppCompatActivity {
 

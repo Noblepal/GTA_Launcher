@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="apps.trichain.gtalauncher.fragment.HomeFragment"
+        android:name="apps.trichain.brasilplayshox.fragment.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_play"
-        android:name="apps.trichain.gtalauncher.fragment.PlayFragment"
+        android:name="apps.trichain.brasilplayshox.fragment.PlayFragment"
         android:label="@string/title_play"
         tools:layout="@layout/fragment_play" />
 
     <fragment
         android:id="@+id/navigation_settings"
-        android:name="apps.trichain.gtalauncher.fragment.SettingsFragment"
+        android:name="apps.trichain.brasilplayshox.fragment.SettingsFragment"
         android:label="@string/title_settings"
         tools:layout="@layout/fragment_notifications" />
 </navigation>

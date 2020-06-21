@@ -1,4 +1,4 @@
-package apps.trichain.gtalauncher.model;
+package apps.trichain.brasilplayshox.model;
 
 import java.io.Serializable;
 

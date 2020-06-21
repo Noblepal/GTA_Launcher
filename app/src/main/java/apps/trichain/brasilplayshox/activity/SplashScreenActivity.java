@@ -1,4 +1,4 @@
-package apps.trichain.gtalauncher.activity;
+package apps.trichain.brasilplayshox.activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -49,27 +49,27 @@ import java.util.Calendar;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import apps.trichain.gtalauncher.R;
-import apps.trichain.gtalauncher.databinding.ActivitySplashScreenBinding;
-import apps.trichain.gtalauncher.fragment.WebViewFragment;
-import apps.trichain.gtalauncher.model.Links;
-import apps.trichain.gtalauncher.service.FileDownloadService;
-import apps.trichain.gtalauncher.util.NetworkController;
-import apps.trichain.gtalauncher.util.SharedPrefsManager;
-import apps.trichain.gtalauncher.util.util;
-import apps.trichain.gtalauncher.viewModel.GameViewModel;
+import apps.trichain.brasilplayshox.R;
+import apps.trichain.brasilplayshox.databinding.ActivitySplashScreenBinding;
+import apps.trichain.brasilplayshox.fragment.WebViewFragment;
+import apps.trichain.brasilplayshox.model.Links;
+import apps.trichain.brasilplayshox.service.FileDownloadService;
+import apps.trichain.brasilplayshox.util.NetworkController;
+import apps.trichain.brasilplayshox.util.SharedPrefsManager;
+import apps.trichain.brasilplayshox.util.util;
+import apps.trichain.brasilplayshox.viewModel.GameViewModel;
 
-import static apps.trichain.gtalauncher.util.util.ANDROID_DATA_DIR;
-import static apps.trichain.gtalauncher.util.util.ANDROID_OBB_DIR;
-import static apps.trichain.gtalauncher.util.util.APK_FILE;
-import static apps.trichain.gtalauncher.util.util.BRASIL_PLAY_SHOX_DIR;
-import static apps.trichain.gtalauncher.util.util.DATA_FILE;
-import static apps.trichain.gtalauncher.util.util.DATA_FILE_PATH;
-import static apps.trichain.gtalauncher.util.util.GTA_SA_PACKAGE_NAME;
-import static apps.trichain.gtalauncher.util.util.OBB_FILE;
-import static apps.trichain.gtalauncher.util.util.OBB_FILE_PATH;
-import static apps.trichain.gtalauncher.util.util.humanify;
-import static apps.trichain.gtalauncher.util.util.saveNickName;
+import static apps.trichain.brasilplayshox.util.util.ANDROID_DATA_DIR;
+import static apps.trichain.brasilplayshox.util.util.ANDROID_OBB_DIR;
+import static apps.trichain.brasilplayshox.util.util.APK_FILE;
+import static apps.trichain.brasilplayshox.util.util.BRASIL_PLAY_SHOX_DIR;
+import static apps.trichain.brasilplayshox.util.util.DATA_FILE;
+import static apps.trichain.brasilplayshox.util.util.DATA_FILE_PATH;
+import static apps.trichain.brasilplayshox.util.util.GTA_SA_PACKAGE_NAME;
+import static apps.trichain.brasilplayshox.util.util.OBB_FILE;
+import static apps.trichain.brasilplayshox.util.util.OBB_FILE_PATH;
+import static apps.trichain.brasilplayshox.util.util.humanify;
+import static apps.trichain.brasilplayshox.util.util.saveNickName;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -78,6 +78,8 @@ public class SplashScreenActivity extends AppCompatActivity {
     private static final int VIEW_DOWNLOAD = 1;
     private static final int VIEW_UPDATE = 2;
     private static final int VIEW_APP_NOT_INSTALLED = 3;
+    private static final int DATA_NOT_FOUND = 4;
+    private static final int OBB_NOT_FOUND = 5;
     private static final String FILE_DATA = "file_data";
     private static final String FILE_OBB = "file_obb";
     private static final String FILE_APK = "file_apk";
@@ -106,13 +108,14 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         /*Check if user launched the app for the
          * first time and download links*/
-        if (sharedPrefsManager.checkIsFirstTimeLaunch()) {
-            Log.e(TAG, "onCreate: First time launch");
-            downloadLinks();
+        downloadLinks();
+
+        if (sharedPrefsManager.isFirstTimeLaunch()) {
+            Log.e(TAG, "onCreate: First time launch ");
+            checkForUpdates();
         } else {
             links = Links.create(sharedPrefsManager.getLinks());
-            Log.e(TAG, "onCreate: Not first time launch. Links: " + links);
-            checkForUpdates();
+            Log.e(TAG, "onCreate: Not first time launch, links: " + links);
         }
 
         verifyNickName();
@@ -133,10 +136,21 @@ public class SplashScreenActivity extends AppCompatActivity {
             mRequestPermissions();
         }
 
+
         /*Show relevant views if package is installed or not*/
         viewModel.getIsPackageInstalled().observe(this, isPackageInstalled -> {
             if (isPackageInstalled) {
-                toggleViews(VIEW_DEFAULT);
+                Log.e(TAG, "onCreate: Package is installed");
+                if (!util.isDataPathExists()) {
+                    Log.e(TAG, "onCreate: DATA not found");
+                    toggleViews(DATA_NOT_FOUND);
+                } else if (!util.isOBBPathExists()) {
+                    Log.e(TAG, "onCreate: OBB not found");
+                    toggleViews(OBB_NOT_FOUND);
+                } else {
+                    Log.e(TAG, "onCreate: Everything up to date");
+                    toggleViews(VIEW_DEFAULT);
+                }
             } else {
                 toggleViews(VIEW_APP_NOT_INSTALLED);
                 b.btnDownloadGTA.setText(getResources().getString(R.string.download_gta, "_Latest" /*String.valueOf(links.getAppVersion())*/));
@@ -225,7 +239,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     private InputFilter filter = (source, start, end, dest, dstart, dend) -> {
 
-        String blockCharacterSet = ".,;@~#^|$%&*!()<>?/:\"'|+=";
+        String blockCharacterSet = ".,;@~#^|$%&*!()<>?/:\"'|+= ";
         if (source != null && blockCharacterSet.contains(("" + source))) {
             return "";
         }
@@ -238,29 +252,33 @@ public class SplashScreenActivity extends AppCompatActivity {
 
 
     private void toggleViews(int viewID) {
+        util.hideView(b.llUpdateData, true);
+        util.hideView(b.clAppNotInstalled, true);
+        util.hideView(b.clDataNotFound, true);
+        util.hideView(b.clOBBNotFound, true);
+        util.hideView(b.llDefault, true);
+        util.hideView(b.llDownloading, true);
         switch (viewID) {
             case VIEW_DOWNLOAD:
-                util.hideView(b.llUpdateData, true);
-                util.hideView(b.clAppNotInstalled, true);
-                util.hideView(b.llDefault, true);
                 util.showView(b.llDownloading, true);
                 break;
             case VIEW_APP_NOT_INSTALLED:
-                util.hideView(b.llUpdateData, true);
                 util.showView(b.clAppNotInstalled, true);
-                util.hideView(b.llDownloading, false);
-                util.hideView(b.llDefault, true);
+                b.btnDownloadGTA.setOnClickListener(v -> downloadFile(FILE_APK));
                 break;
             case VIEW_UPDATE:
                 util.showView(b.llUpdateData, true);
-                util.hideView(b.clAppNotInstalled, true);
-                util.hideView(b.llDownloading, false);
-                util.hideView(b.llDefault, true);
+                b.tvUpdateData.setOnClickListener(v -> downloadFile(FILE_DATA));
+                break;
+            case DATA_NOT_FOUND:
+                util.showView(b.clDataNotFound, true);
+                b.btnDownloadData.setOnClickListener(v -> downloadFile(FILE_DATA));
+                break;
+            case OBB_NOT_FOUND:
+                util.showView(b.clOBBNotFound, true);
+                b.btnDownloadOBB.setOnClickListener(v -> downloadFile(FILE_OBB));
                 break;
             default://TODO
-                util.hideView(b.llUpdateData, true);
-                util.hideView(b.clAppNotInstalled, true);
-                util.hideView(b.llDownloading, false);
                 util.showView(b.llDefault, true);
                 b.tvProceed.setOnClickListener(v -> {
                     startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
@@ -289,6 +307,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
 
     private void checkForUpdates() {
+        Toast.makeText(this, "Checking for updates", Toast.LENGTH_SHORT).show();
         urlEventListener = dbReference.child("links").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -328,6 +347,12 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
 
     private void downloadFile(String fileToDownload) {
+        if (links == null) {
+            downloadLinks();
+            Toast.makeText(this, "Tente novamente", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        toggleViews(VIEW_DOWNLOAD);
         b.tvDownloadProgress.setText(R.string.preparing);
         b.pbDownloading.setIndeterminate(true);
         String downloadedFileName = "";
@@ -337,9 +362,12 @@ public class SplashScreenActivity extends AppCompatActivity {
             //serverFilePath = "https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-zip-file.zip";
             downloadedFileName = DATA_FILE;
         } else if (fileToDownload.equals(FILE_OBB)) {//Download OBB File
+            serverFilePath = links.getObbURL();
             downloadedFileName = OBB_FILE;
+            Log.e(TAG, "downloadFile: OBB URL: " + serverFilePath);
         } else {
-            serverFilePath = "https://dl.apkhere.com/down.do/com.rockstargames.gtasa_1.08_paid?code=00c5cd28118695180c15ea360b16621e";
+            serverFilePath = links.getApkURL();
+            Log.e(TAG, "downloadFile: APK URL: " + serverFilePath);
             downloadedFileName = APK_FILE;
         }
 
@@ -371,7 +399,8 @@ public class SplashScreenActivity extends AppCompatActivity {
 
             @Override
             public void onDownloadFailed() {
-                b.tvDownloadProgress.setText(R.string.download_failed);
+                b.tvDownloadProgress.setText(getResources().getString(R.string.download_failed,
+                        fileToDownload.equals(FILE_DATA) ? links.getDataURL() : links.getObbURL()));
                 b.pbDownloading.setIndeterminate(false);
                 b.pbDownloading.setProgress(0);
             }

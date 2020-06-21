@@ -1,4 +1,4 @@
-package apps.trichain.gtalauncher.fragment;
+package apps.trichain.brasilplayshox.fragment;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -20,11 +20,11 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import apps.trichain.gtalauncher.GameListAdapter;
-import apps.trichain.gtalauncher.R;
-import apps.trichain.gtalauncher.databinding.FragmentPlayBinding;
-import apps.trichain.gtalauncher.model.Game;
-import apps.trichain.gtalauncher.util.util;
+import apps.trichain.brasilplayshox.GameListAdapter;
+import apps.trichain.brasilplayshox.R;
+import apps.trichain.brasilplayshox.databinding.FragmentPlayBinding;
+import apps.trichain.brasilplayshox.model.Game;
+import apps.trichain.brasilplayshox.util.util;
 
 public class PlayFragment extends Fragment {
 

@@ -1,4 +1,4 @@
-package apps.trichain.gtalauncher.util;
+package apps.trichain.brasilplayshox.util;
 
 import android.content.Context;
 import android.graphics.Bitmap;

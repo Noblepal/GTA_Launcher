@@ -1,4 +1,4 @@
-package apps.trichain.gtalauncher;
+package apps.trichain.brasilplayshox;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("apps.trichain.gtalauncher", appContext.getPackageName());
+        assertEquals("apps.trichain.brasilplayshox", appContext.getPackageName());
     }
 }

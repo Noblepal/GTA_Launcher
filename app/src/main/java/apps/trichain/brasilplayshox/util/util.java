@@ -1,4 +1,4 @@
-package apps.trichain.gtalauncher.util;
+package apps.trichain.brasilplayshox.util;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -73,6 +73,16 @@ public class util {
                 v.setVisibility(View.VISIBLE);
             }
         }
+    }
+
+    public static boolean isDataPathExists() {
+        File data_target = new File(Environment.getExternalStorageDirectory() + ANDROID_DATA_DIR + GTA_SA_PACKAGE_NAME);
+        return data_target.exists();
+    }
+
+    public static boolean isOBBPathExists() {
+        File obb_target = new File(Environment.getExternalStorageDirectory() + ANDROID_OBB_DIR + GTA_SA_PACKAGE_NAME);
+        return obb_target.exists();
     }
 
     public static File getDownloadedPath() {

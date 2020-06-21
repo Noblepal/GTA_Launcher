@@ -8,7 +8,7 @@
 
         <variable
             name="game"
-            type="apps.trichain.gtalauncher.model.Game" />
+            type="apps.trichain.brasilplayshox.model.Game" />
 
     </data>
 

@@ -1,4 +1,4 @@
-package apps.trichain.gtalauncher;
+package apps.trichain.brasilplayshox;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import apps.trichain.gtalauncher.databinding.ItemGameBinding;
-import apps.trichain.gtalauncher.model.Game;
+import apps.trichain.brasilplayshox.databinding.ItemGameBinding;
+import apps.trichain.brasilplayshox.model.Game;
 
 public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHolder> {
 

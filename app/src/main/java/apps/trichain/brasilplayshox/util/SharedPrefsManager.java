@@ -1,9 +1,9 @@
-package apps.trichain.gtalauncher.util;
+package apps.trichain.brasilplayshox.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import apps.trichain.gtalauncher.model.Links;
+import apps.trichain.brasilplayshox.model.Links;
 
 public class SharedPrefsManager {
     private static SharedPreferences sharedPreferences;
@@ -24,7 +24,7 @@ public class SharedPrefsManager {
         sharedPreferences.edit().putBoolean("is_first_time_launch", isFirstTimeLaunch).apply();
     }
 
-    public boolean checkIsFirstTimeLaunch() {
+    public boolean isFirstTimeLaunch() {
         return sharedPreferences.getBoolean("is_first_time_launch", true);
     }
 

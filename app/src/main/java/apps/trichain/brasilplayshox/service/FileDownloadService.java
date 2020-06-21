@@ -1,4 +1,4 @@
-package apps.trichain.gtalauncher.service;
+package apps.trichain.brasilplayshox.service;
 
 import android.app.IntentService;
 import android.content.Context;

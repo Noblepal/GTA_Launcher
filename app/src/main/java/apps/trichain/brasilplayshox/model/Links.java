@@ -1,4 +1,4 @@
-package apps.trichain.gtalauncher.model;
+package apps.trichain.brasilplayshox.model;
 
 import androidx.annotation.NonNull;
 
@@ -6,21 +6,22 @@ import com.google.gson.Gson;
 
 public class Links {
     private Float appVersion;
+    private String apkURL;
     private String dataURL;
     private String obbURL;
-    private String realOBBURL;
     private int updateVersion;
 
     public Links() {
     }
 
-    public String getRealOBBURL() {
-        return realOBBURL;
+    public String getApkURL() {
+        return apkURL;
     }
 
-    public void setRealOBBURL(String realOBBURL) {
-        this.realOBBURL = realOBBURL;
+    public void setApkURL(String apkURL) {
+        this.apkURL = apkURL;
     }
+
 
     public Float getAppVersion() {
         return appVersion;

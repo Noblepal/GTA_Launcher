@@ -1,4 +1,4 @@
-package apps.trichain.gtalauncher.fragment;
+package apps.trichain.brasilplayshox.fragment;
 
 import android.os.Bundle;
 import android.text.InputFilter;
@@ -12,11 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
-import apps.trichain.gtalauncher.R;
-import apps.trichain.gtalauncher.databinding.FragmentFirstBinding;
-import apps.trichain.gtalauncher.util.SharedPrefsManager;
+import apps.trichain.brasilplayshox.R;
+import apps.trichain.brasilplayshox.databinding.FragmentFirstBinding;
+import apps.trichain.brasilplayshox.util.SharedPrefsManager;
 
-import static apps.trichain.gtalauncher.util.util.saveNickName;
+import static apps.trichain.brasilplayshox.util.util.saveNickName;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -72,7 +72,7 @@ public class FirstFragment extends Fragment {
 
     private InputFilter filter = (source, start, end, dest, dstart, dend) -> {
 
-        String blockCharacterSet = ".,;@~#^|$%&*!()<>?/:\"'|+=";
+        String blockCharacterSet = ".,;@~#^|$%&*!()<>?/:\"'|+= ";
         if (source != null && blockCharacterSet.contains(("" + source))) {
             return "";
         }
