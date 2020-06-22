@@ -75,7 +75,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE = 325;
     private static final int VIEW_DEFAULT = 0;
-    private static final int VIEW_DOWNLOAD = 1;
+    private static final int VIEW_DOWNLOADING = 1;
     private static final int VIEW_UPDATE = 2;
     private static final int VIEW_APP_NOT_INSTALLED = 3;
     private static final int DATA_NOT_FOUND = 4;
@@ -155,7 +155,6 @@ public class SplashScreenActivity extends AppCompatActivity {
                 toggleViews(VIEW_APP_NOT_INSTALLED);
                 b.btnDownloadGTA.setText(getResources().getString(R.string.download_gta, "_Latest" /*String.valueOf(links.getAppVersion())*/));
                 b.btnDownloadGTA.setOnClickListener(v -> {
-                    toggleViews(VIEW_DOWNLOAD);
                     downloadFile(FILE_APK);
                 });
             }
@@ -259,7 +258,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         util.hideView(b.llDefault, true);
         util.hideView(b.llDownloading, true);
         switch (viewID) {
-            case VIEW_DOWNLOAD:
+            case VIEW_DOWNLOADING:
                 util.showView(b.llDownloading, true);
                 break;
             case VIEW_APP_NOT_INSTALLED:
@@ -347,19 +346,18 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
 
     private void downloadFile(String fileToDownload) {
+        toggleViews(VIEW_DOWNLOADING);
         if (links == null) {
             downloadLinks();
             Toast.makeText(this, "Tente novamente", Toast.LENGTH_SHORT).show();
             return;
         }
-        toggleViews(VIEW_DOWNLOAD);
         b.tvDownloadProgress.setText(R.string.preparing);
         b.pbDownloading.setIndeterminate(true);
         String downloadedFileName = "";
         if (fileToDownload.equals(FILE_DATA)) {
             serverFilePath = links.getDataURL();
             Log.e(TAG, "downloadFile: Data URL: " + serverFilePath);
-            //serverFilePath = "https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-zip-file.zip";
             downloadedFileName = DATA_FILE;
         } else if (fileToDownload.equals(FILE_OBB)) {//Download OBB File
             serverFilePath = links.getObbURL();
@@ -370,6 +368,8 @@ public class SplashScreenActivity extends AppCompatActivity {
             Log.e(TAG, "downloadFile: APK URL: " + serverFilePath);
             downloadedFileName = APK_FILE;
         }
+
+        //serverFilePath = "https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-zip-file.zip";
 
         String downloadPath = util.getDownloadedPath().getPath();
         File file = new File(downloadPath, downloadedFileName);
