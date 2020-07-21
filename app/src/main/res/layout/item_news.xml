@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?><!--App installed view-->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="newsItem"
+            type="apps.trichain.brasilplayshox.model.NewsModel" />
+
+    </data>
+
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/llLaunchGameParent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="vertical"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@id/homeToolBar">
+
+        <LinearLayout
+            android:id="@+id/llLaunchGame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@drawable/gradient_card_bg"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="vertical"
+            android:padding="16dp"
+            app:layout_constraintTop_toBottomOf="@id/homeToolBar">
+
+            <TextView
+                android:id="@+id/tvNewsDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:drawableStart="@drawable/ic_date"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@{newsItem.date}"
+                android:textColor="@color/colorWhite"
+                android:textSize="14sp"
+                tools:text="02, May 2020" />
+
+            <TextView
+                android:id="@+id/tvNewsContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="16dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@{newsItem.title}"
+                android:textColor="@color/colorWhite"
+                android:textSize="24sp"
+                tools:text="@string/launch_gta_sa" />
+
+            <TextView
+                android:id="@+id/tvNewsUrl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="16dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@{newsItem.url}"
+                android:textColor="@color/colorWhite"
+                android:textSize="11sp"
+                tools:text="@string/launch_gta_sa" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

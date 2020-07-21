@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:orientation="vertical"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@id/homeToolBar">
 
             <LinearLayout
@@ -50,10 +50,10 @@
                 android:layout_margin="8dp"
                 android:background="@drawable/gradient_card_bg"
                 android:clickable="true"
+                android:focusable="true"
                 android:orientation="vertical"
                 android:padding="16dp"
-                app:layout_constraintTop_toBottomOf="@id/homeToolBar"
-                android:focusable="true">
+                app:layout_constraintTop_toBottomOf="@id/homeToolBar">
 
                 <TextView
                     android:id="@+id/tvLaunchGame"
@@ -80,6 +80,15 @@
             </LinearLayout>
 
         </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewNews"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/llLaunchGameParent"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_news" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
